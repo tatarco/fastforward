@@ -25,7 +25,8 @@ Then open a terminal in a project folder and run `claude`.
 Pick one: `... | bash -s -- full` on mac, `$env:FF_PROFILE="full"; irm ... | iex` on Windows.
 
 Also written: a short `~/.claude/CLAUDE.md` (terse output, cheap subagent models, one task per
-session) and a `settings.json` fragment (read-deny for `.env`/keys/`node_modules`, output caps).
+session) and a `settings.json` fragment (read-deny for `.env`/keys/`node_modules`, output caps - hygiene, not a sandbox: it stops
+casual reads, not a determined shell command).
 Existing files are merged, never overwritten; a `.bak-<timestamp>` is left next to `settings.json`.
 
 Re-run any time. Everything is idempotent.

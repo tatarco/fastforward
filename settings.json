@@ -6,9 +6,23 @@
   },
   "permissions": {
     "deny": [
-      "Read(**/.env)", "Read(**/.env.*)", "Read(**/node_modules/**)", "Read(**/dist/**)",
-      "Read(**/build/**)", "Read(**/.git/objects/**)", "Read(**/*.key)", "Read(**/*.pem)",
-      "Read(**/*.log)", "Read(**/coverage/**)", "Read(**/.next/**)"
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/node_modules/**)",
+      "Read(**/dist/**)",
+      "Read(**/build/**)",
+      "Read(**/.git/objects/**)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Read(**/*.log)",
+      "Read(**/coverage/**)",
+      "Read(**/.next/**)",
+      "Read(**/.ssh/**)",
+      "Read(**/.aws/**)",
+      "Read(**/*.p12)",
+      "Read(**/*.pfx)",
+      "Read(**/credentials*.json)",
+      "Read(**/secrets/**)"
     ]
   },
   "effortLevel": "medium"

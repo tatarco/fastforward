@@ -30,6 +30,9 @@ Existing files are merged, never overwritten; a `.bak-<timestamp>` is left next 
 
 Re-run any time. Everything is idempotent.
 
+This installs third-party plugins and skills at their latest versions - read `profiles/*.txt`
+before running if you want to know exactly what lands on your machine.
+
 ## After a week
 
 ```

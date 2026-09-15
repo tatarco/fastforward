@@ -3,7 +3,6 @@
 #   $env:FF_PROFILE="full"; irm ... | iex        # core | dev (default) | full
 $ErrorActionPreference = "Continue"
 $Profile_ = if ($env:FF_PROFILE) { $env:FF_PROFILE } else { "dev" }
-$Raw = "https://raw.githubusercontent.com/tatarco/fastforward/main"
 $ClaudeDir = if ($env:CLAUDE_CONFIG_DIR) { $env:CLAUDE_CONFIG_DIR } else { Join-Path $HOME ".claude" }
 $Work = Join-Path ([IO.Path]::GetTempPath()) ("ff-" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $Work -Force | Out-Null
@@ -23,7 +22,8 @@ if ($IsWindows -or $env:OS -eq "Windows_NT") {
 if (-not (Have claude)) { irm https://claude.ai/install.ps1 | iex; RefreshPath }
 
 Say "profile: $Profile_"
-function Fetch($rel) { $out = Join-Path $Work (Split-Path $rel -Leaf); irm "$Raw/$rel?$([DateTimeOffset]::Now.ToUnixTimeSeconds())" -OutFile $out; $out }  # ?ts busts the raw CDN cache
+git clone -q --depth 1 https://github.com/tatarco/fastforward (Join-Path $Work "kit")   # raw.githubusercontent caches for minutes; a clone is always current
+function Fetch($rel) { $out = Join-Path $Work (Split-Path $rel -Leaf); Copy-Item (Join-Path $Work "kit\$rel") $out; $out }
 function Resolve-Profile($name) {
   $file = Fetch "profiles/$name.txt"
   foreach ($line in Get-Content $file) {

@@ -3,7 +3,6 @@
 #   curl -fsSL https://raw.githubusercontent.com/tatarco/fastforward/main/install.sh | bash -s -- [core|dev|full]
 set -euo pipefail
 PROFILE="${1:-dev}"
-RAW="https://raw.githubusercontent.com/tatarco/fastforward/main"
 CLAUDE_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT
 say() { printf '\033[1;36m>> %s\033[0m\n' "$*"; }
@@ -22,7 +21,8 @@ have claude || curl -fsSL https://claude.ai/install.sh | bash
 export PATH="$HOME/.local/bin:$PATH"
 
 say "profile: $PROFILE"
-fetch() { curl -fsSL "$RAW/$1?$(date +%s)" -o "$WORK/$(basename "$1")"; }  # ?ts busts the raw CDN cache
+git clone -q --depth 1 https://github.com/tatarco/fastforward "$WORK/kit"   # raw.githubusercontent caches for minutes; a clone is always current
+fetch() { cp "$WORK/kit/$1" "$WORK/$(basename "$1")"; }
 resolve() {  # expand 'include' lines recursively
   fetch "profiles/$1.txt"
   while read -r kind arg _; do

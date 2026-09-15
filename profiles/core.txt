@@ -1,5 +1,5 @@
-# one item per line. kinds: plugin | skill | marketplace
-plugin superpowers@claude-plugins-official
+# one item per line. kinds: marketplace | plugin | skill | include. order matters.
 marketplace anthropics/claude-plugins-official
+plugin superpowers@claude-plugins-official
 plugin commit-commands@claude-plugins-official
 skill vercel-labs/skills@find-skills

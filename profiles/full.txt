@@ -1,0 +1,9 @@
+include dev
+marketplace nextlevelbuilder/ui-ux-pro-max-skill
+plugin ui-ux-pro-max@ui-ux-pro-max-skill
+marketplace mvanhorn/last30days-skill
+plugin last30days@last30days-skill
+skill pbakaus/impeccable
+skill emilkowalski/skills
+skill leonxlnx/taste-skill@minimalist-ui
+skill tatarco/agent-skills@typed-phase

@@ -1,0 +1,18 @@
+include core
+# planning
+skill mattpocock/skills
+plugin feature-dev@claude-plugins-official
+# frontend design
+plugin frontend-design@claude-plugins-official
+plugin security-guidance@claude-plugins-official
+plugin typescript-lsp@claude-plugins-official
+skill pbakaus/impeccable@impeccable
+skill leonxlnx/taste-skill@design-taste-frontend
+skill leonxlnx/taste-skill@high-end-visual-design
+skill leonxlnx/taste-skill@redesign-existing-projects
+skill emilkowalski/skills@emil-design-eng
+skill tatarco/agent-skills@fe-gal
+skill tatarco/agent-skills@fe-ux-patterns
+skill tatarco/agent-skills@fe-redesign-mobile
+skill tatarco/agent-skills@repair-engine
+skill tatarco/agent-skills@telegram-notify

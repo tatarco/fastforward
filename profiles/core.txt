@@ -1,0 +1,4 @@
+# one item per line. kinds: plugin | skill | marketplace
+plugin superpowers@claude-plugins-official
+plugin commit-commands@claude-plugins-official
+skill vercel-labs/skills@find-skills

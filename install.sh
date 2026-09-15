@@ -21,7 +21,7 @@ have claude || curl -fsSL https://claude.ai/install.sh | bash
 export PATH="$HOME/.local/bin:$PATH"
 
 say "profile: $PROFILE"
-fetch() { curl -fsSL "$RAW/$1" -o "$WORK/$(basename "$1")"; }
+fetch() { curl -fsSL "$RAW/$1?$(date +%s)" -o "$WORK/$(basename "$1")"; }  # ?ts busts the raw CDN cache
 resolve() {  # expand 'include' lines recursively
   fetch "profiles/$1.txt"
   while read -r kind arg _; do
@@ -32,11 +32,11 @@ resolve "$PROFILE" | awk '!seen[$0]++' > "$WORK/items"
 
 while read -r kind arg; do
   case "$kind" in
-    marketplace) say "marketplace $arg"; claude plugin marketplace add "$arg" >/dev/null 2>&1 || true ;;
-    plugin)      say "plugin $arg";      out=$(claude plugin install "$arg" 2>&1) || true; echo "$out" | grep -qi "failed" && echo "   $out" | tail -1 ;;
-    skill)       say "skill $arg";       npx -y skills add "$arg" -g -y >/dev/null 2>&1 || echo "   (failed: $arg)" ;;
+    marketplace) say "marketplace $arg"; claude plugin marketplace add "$arg" </dev/null >/dev/null 2>&1 || true ;;
+    plugin)      say "plugin $arg";      out=$(claude plugin install "$arg" 2>&1 </dev/null) || true; echo "$out" | grep -qi "failed" && echo "   $out" | tail -1 ;;
+    skill)       say "skill $arg";       npx -y skills add "$arg" -g -y </dev/null >/dev/null 2>&1 || echo "   (failed: $arg)" ;;
   esac
-done < "$WORK/items"
+done < "$WORK/items"   # every command above gets </dev/null or it eats this loop's stdin
 
 say "settings + CLAUDE.md"
 mkdir -p "$CLAUDE_DIR"

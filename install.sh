@@ -33,7 +33,7 @@ resolve "$PROFILE" | awk '!seen[$0]++' > "$WORK/items"
 while read -r kind arg; do
   case "$kind" in
     marketplace) say "marketplace $arg"; claude plugin marketplace add "$arg" >/dev/null 2>&1 || true ;;
-    plugin)      say "plugin $arg";      claude plugin install "$arg" >/dev/null 2>&1 || echo "   (already installed or failed: $arg)" ;;
+    plugin)      say "plugin $arg";      out=$(claude plugin install "$arg" 2>&1) || true; echo "$out" | grep -qi "failed" && echo "   $out" | tail -1 ;;
     skill)       say "skill $arg";       npx -y skills add "$arg" -g -y >/dev/null 2>&1 || echo "   (failed: $arg)" ;;
   esac
 done < "$WORK/items"

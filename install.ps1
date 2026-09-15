@@ -38,7 +38,7 @@ foreach ($item in $Items) {
   $kind, $arg = $item -split ' ', 2
   switch ($kind) {
     "marketplace" { Say "marketplace $arg"; claude plugin marketplace add $arg *> $null }
-    "plugin"      { Say "plugin $arg";      claude plugin install $arg *> $null; if ($LASTEXITCODE) { Write-Host "   (already installed or failed: $arg)" } }
+    "plugin"      { Say "plugin $arg";      $out = (claude plugin install $arg 2>&1 | Out-String); if ($out -match "Failed") { Write-Host "   $($out.Trim())" } }
     "skill"       { Say "skill $arg";       npx -y skills add $arg -g -y *> $null; if ($LASTEXITCODE) { Write-Host "   (failed: $arg)" } }
   }
 }

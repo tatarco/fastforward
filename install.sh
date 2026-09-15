@@ -9,6 +9,7 @@ WORK="$(mktemp -d)"; trap 'rm -rf "$WORK"' EXIT
 say() { printf '\033[1;36m>> %s\033[0m\n' "$*"; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
+main() {
 say "prereqs"
 if [ "$(uname)" = Darwin ]; then
   have brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -49,3 +50,5 @@ say "setup-audit (/setup-audit grades your habits after a week of use)"
 
 say "done - open a terminal in a project and run: claude"
 echo "   browser automation: install 'Claude in Chrome' -> https://claude.ai/chrome"
+}
+main "$@"   # whole file parsed before anything runs, so curl|bash is safe
